@@ -1,0 +1,43 @@
+{
+    "name":"JWT CFML",
+    "version":"1.0.0",
+    "author":"John Berquist",
+    "location":"forgeboxStorage",
+    "homepage":"https://github.com/jcberquist/jwt-cfml",
+    "documentation":"",
+    "repository":{
+        "type":"",
+        "URL":""
+    },
+    "bugs":"",
+    "slug":"jwt-cfml",
+    "packageDirectory": "jwtcfml",
+    "shortDescription":"JWT CFML is a CFML (Lucee and ColdFusion) library for using JSON Web Tokens.",
+    "description":"",
+    "instructions":"",
+    "changelog":"",
+    "type":"modules",
+    "keywords":[
+        "jwt"
+    ],
+    "private":false,
+    "projectURL":"",
+    "license":[
+        {
+            "type":"MIT",
+            "URL":""
+        }
+    ],
+    "contributors":[],
+    "dependencies":{},
+    "devDependencies":{
+        "testbox":"^3.0.0"
+    },
+    "installPaths":{
+        "testbox":"testbox/"
+    },
+    "scripts": {
+        "tests": "start tests/server.json && start tests/server-2018.json && start tests/server-2016.json",
+        "format": "cfformat models,tests --overwrite"
+    }
+}
