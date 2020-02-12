@@ -43,6 +43,6 @@
     ],
     "scripts": {
         "tests": "start tests/server.json && start tests/server-2018.json && start tests/server-2016.json",
-        "format": "cfformat models,tests --overwrite"
+        "format": "cfformat run models,tests --overwrite"
     }
 }
