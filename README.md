@@ -14,7 +14,7 @@ It supports the following algorithms:
 - ES384
 - ES512
 
-In the case of the `RS` and `ES` algorithms, asymmetric keys are expected to be provided in unencrypted PEM or JWK format (in the latter case first deserialize the JWK to a CFML struct). When use PEM, private keys need to be encoded in PKCS#8 format.
+In the case of the `RS` and `ES` algorithms, asymmetric keys are expected to be provided in unencrypted PEM or JWK format (in the latter case first deserialize the JWK to a CFML struct). When using PEM, private keys need to be encoded in PKCS#8 format.
 
 If your private key is not currently in this format, conversion should be straightforward:
 
