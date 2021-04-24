@@ -5,5 +5,5 @@
     "jvm":{
         "javaVersion":"openjdk11"
     },
-    "name":"tests"
+    "name":"jwtcfml"
 }
