@@ -3,7 +3,7 @@
         "cfengine":"lucee@5"
     },
     "jvm":{
-        "javaVersion":"openjdk11"
+        "javaVersion":"openjdk8"
     },
-    "name":"tests"
+    "name":"jwtcfml-java8"
 }

@@ -31,7 +31,7 @@
     "contributors":[],
     "dependencies":{},
     "devDependencies":{
-        "testbox":"^3.0.0"
+        "testbox":"^4.0.0"
     },
     "installPaths":{
         "testbox":"testbox/"
@@ -42,7 +42,7 @@
         "**/*.md"
     ],
     "scripts": {
-        "tests": "start tests/server.json && start tests/server-2018.json && start tests/server-2016.json",
+        "tests": "start tests/server.json && start tests/server-java8.json && start tests/server-2018.json && start tests/server-2016.json",
         "format": "cfformat run models,tests --overwrite"
     }
 }

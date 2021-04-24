@@ -1,8 +1,6 @@
 component {
 
-    rootPath = getDirectoryFromPath( getCurrentTemplatePath() )
-        .replace( '\', '/', 'all' )
-        .replaceNoCase( 'tests/', '' );
+    rootPath = getDirectoryFromPath( getCurrentTemplatePath() ).replace( '\', '/', 'all' ).replaceNoCase( 'tests/', '' );
 
     this.mappings[ '/testbox' ] = rootPath & '/testbox';
     this.mappings[ '/models' ] = rootPath & '/models';

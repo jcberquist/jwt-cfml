@@ -7,6 +7,12 @@ component {
         RS256: 'SHA256withRSA',
         RS384: 'SHA384withRSA',
         RS512: 'SHA512withRSA',
+        ES256: 'SHA256withECDSAinP1363Format',
+        ES384: 'SHA384withECDSAinP1363Format',
+        ES512: 'SHA512withECDSAinP1363Format'
+    };
+
+    variables.legacyAlgorithmMap = {
         ES256: 'SHA256withECDSA',
         ES384: 'SHA384withECDSA',
         ES512: 'SHA512withECDSA'
@@ -16,6 +22,12 @@ component {
         variables.encodingUtils = new encodingUtils();
         variables.jss = createObject( 'java', 'java.security.Signature' );
         variables.messageDigest = createObject( 'java', 'java.security.MessageDigest' );
+        variables.javaVersion = getJavaVersion();
+
+        if ( variables.javaVersion < 11 ) {
+            structAppend( variables.algorithmMap, variables.legacyAlgorithmMap );
+        }
+
         return this;
     }
 
@@ -161,7 +173,7 @@ component {
             jssInstance.initSign( key );
             jssInstance.update( charsetDecode( message, 'utf-8' ) );
             var sig = jssInstance.sign();
-            if ( left( algorithm, 1 ) == 'E' ) {
+            if ( variables.javaVersion < 11 && left( algorithm, 1 ) == 'E' ) {
                 sig = encodingUtils.convertDERtoP1363( sig, algorithm );
             }
         }
@@ -182,7 +194,7 @@ component {
             return MessageDigest.isEqual( signature, sig );
         }
 
-        if ( left( algorithm, 1 ) == 'E' ) {
+        if ( variables.javaVersion < 11 && left( algorithm, 1 ) == 'E' ) {
             signature = encodingUtils.convertP1363ToDER( signature );
         }
 
@@ -201,7 +213,7 @@ component {
     private function verifyClaims( payload, claims ) {
         if (
             structKeyExists( payload, 'exp' )
-             && !verifyDateClaim( payload.exp, claims.exp, -1 )
+            && !verifyDateClaim( payload.exp, claims.exp, -1 )
         ) {
             throw(
                 type = 'jwtcfml.ExpiredSignature',
@@ -212,7 +224,7 @@ component {
 
         if (
             structKeyExists( payload, 'nbf' )
-             && !verifyDateClaim( payload.nbf, claims.nbf, 1 )
+            && !verifyDateClaim( payload.nbf, claims.nbf, 1 )
         ) {
             throw(
                 type = 'jwtcfml.NotBeforeException',
@@ -257,6 +269,14 @@ component {
             return dateCompare( pd, cd ) != failState;
         }
         return true;
+    }
+
+    private numeric function getJavaVersion() {
+        var javaVersion = createObject( 'java', 'java.lang.System' ).getProperty( 'java.version' );
+        if ( javaVersion.startswith( '1.' ) ) {
+            return int( listGetAt( javaVersion, 2, '.' ) );
+        }
+        return int( listFirst( javaVersion, '.' ) );
     }
 
 }
