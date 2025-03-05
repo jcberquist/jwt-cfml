@@ -3,6 +3,10 @@ component {
     public any function init() {
         variables.utcBaseDate = createObject( 'java', 'java.util.Date' ).init( javacast( 'long', 0 ) );
         variables.ECParameterSpecCache = { };
+
+        var Base64 = createObject( 'java', 'java.util.Base64' );
+        variables.base64UrlEncoder = Base64.getUrlEncoder().withoutPadding();
+        variables.base64UrlDecoder = Base64.getUrlDecoder();
     }
 
     function convertDateToUnixTimestamp( required date dateToConvert ) {
@@ -14,16 +18,11 @@ component {
     }
 
     function base64UrlToBinary( base64url ) {
-        var base64 = base64url.replace( '-', '+', 'all' ).replace( '_', '/', 'all' );
-        var padded = base64 & repeatString( '=', 4 - ( len( base64 ) % 4 ) );
-        return binaryDecode( padded, 'base64' );
+        return variables.base64UrlDecoder.decode( base64url );
     }
 
     function binaryToBase64Url( source ) {
-        return binaryEncode( source, 'base64' )
-            .replace( '+', '-', 'all' )
-            .replace( '/', '_', 'all' )
-            .replace( '=', '', 'all' );
+        return variables.base64UrlEncoder.encodeToString( source );
     }
 
     /**
