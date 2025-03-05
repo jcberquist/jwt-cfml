@@ -1,6 +1,6 @@
 {
     "name":"JWT CFML",
-    "version":"1.2.0",
+    "version":"1.2.1",
     "author":"John Berquist",
     "location":"forgeboxStorage",
     "homepage":"https://github.com/jcberquist/jwt-cfml",

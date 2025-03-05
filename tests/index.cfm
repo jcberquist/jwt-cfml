@@ -1,6 +1,6 @@
 <cfsilent>
 <cfscript>
-testbox = new testbox.system.Testbox();
+testbox = new testbox.system.TestBox();
 param name="url.reporter" default="simple";
 param name="url.directory" default="specs";
 args = {
