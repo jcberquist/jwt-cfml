@@ -1,7 +1,7 @@
 component {
 
     public any function init() {
-        variables.utcBaseDate = createObject( 'java', 'java.util.Date' ).init( javacast( 'int', 0 ) );
+        variables.utcBaseDate = createObject( 'java', 'java.util.Date' ).init( javacast( 'long', 0 ) );
         variables.ECParameterSpecCache = { };
     }
 
